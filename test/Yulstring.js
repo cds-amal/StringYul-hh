@@ -13,13 +13,12 @@ describe("YulString", function() {
     const [owner, otherAccount] = await ethers.getSigners();
 
     const YulString = await ethers.getContractFactory("YulString");
-    console.log(Object.keys(YulString));
     const yulString = await YulString.deploy();
 
     return { yulString, owner, otherAccount };
   }
 
-  describe("Deployment", function() {
+  describe("Set and Get strings", function() {
     it("should handle 'hello world'", async function() {
       const { yulString } = await loadFixture(deployYulString);
 
@@ -29,5 +28,16 @@ describe("YulString", function() {
 
       expect(val).to.equal(text);
     });
+
+    [8, 15, 16, 17, 31, 32, 33, 64, 65, 515].forEach(function (len) {
+      it(`should handle strlen ${len}`, async function() {
+        const { yulString } = await loadFixture(deployYulString);
+        const text = "0".repeat(len);
+        await yulString.setValue(text);
+        let val = await yulString.getValue();
+        expect(val).to.equal(text);
+      });
+    })
+
   });
 });
