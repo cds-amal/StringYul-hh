@@ -1,4 +1,4 @@
-module.exports = {
+const YulString = {
   abi: [
     {
       "inputs": [],
@@ -28,3 +28,5 @@ module.exports = {
     },
   ],
 };
+
+export default YulString;

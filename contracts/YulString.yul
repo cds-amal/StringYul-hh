@@ -219,7 +219,3 @@ object "YulString" {
         }
     }
 }
-
-
-
-
